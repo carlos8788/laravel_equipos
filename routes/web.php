@@ -29,3 +29,7 @@ Route::post('/equipos', [EquipoPrimeraController::class, 'store'])->name('equipo
 
 Route::delete('/equipos/{equipo}', [EquipoPrimeraController::class, 'destroy'])->name('equipos.destroy');
 
+Route::get('/equipos/{equipo}/edit', [EquipoPrimeraController::class, 'edit'])->name('equipos.edit');
+
+Route::put('/equipos/{equipo}', [EquipoPrimeraController::class, 'update'])->name('equipos.update');
+

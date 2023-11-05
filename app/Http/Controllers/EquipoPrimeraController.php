@@ -43,4 +43,27 @@ class EquipoPrimeraController extends Controller
         // Retorna una respuesta JSON para la solicitud fetch
         return response()->json(['success' => 'El equipo fue eliminado.']);
     }
+
+    public function edit(EquipoPrimera $equipo)
+    {
+        return view('equipos.edit', compact('equipo'));
+    }
+
+    public function update(Request $request, EquipoPrimera $equipo)
+{
+    $validatedData = $request->validate([
+        'nombre' => 'required|string|max:255',
+        'abreviacion' => 'required|string|max:10',
+        'estadio' => 'required|string|max:255',
+        'alias' => 'nullable|string|max:255',
+        'anios_fundacion' => 'required|integer|min:1800|max:' . date('Y'),
+        'campeonatos' => 'required|integer|min:0',
+        'url' => 'nullable|url',
+    ]);
+
+    $equipo->update($validatedData);
+
+    return redirect()->route('equipos.index')->with('success', 'Equipo actualizado con éxito.');
+}
+
 }
